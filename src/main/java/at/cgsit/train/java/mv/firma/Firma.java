@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Klasse Firma verwaltet eine Liste von Personen (Mitarbeiter und Kunden).
  * Ermöglicht das Hinzufügen, Entfernen, Suchen und Auswerten von Personen.
  */
-public abstract class Firma extends FirmaBase implements PersonManager {
+public abstract class Firma extends FirmaBase implements PersonManager, MitarbeiterManagement {
 
     // Listet alle Mitarbeiter einer bestimmten Abteilung auf
     public List<Mitarbeiter> mitarbeiterNachAbteilung(Mitarbeiter.Beschaeftigungsart art) {

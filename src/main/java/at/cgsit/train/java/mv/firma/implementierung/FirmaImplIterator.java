@@ -1,5 +1,6 @@
-package at.cgsit.train.java.mv.firma;
+package at.cgsit.train.java.mv.firma.implementierung;
 
+import at.cgsit.train.java.mv.firma.Firma;
 import at.cgsit.train.java.mv.personen.Person;
 
 import java.util.Iterator;

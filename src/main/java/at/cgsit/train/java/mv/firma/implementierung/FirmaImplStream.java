@@ -1,11 +1,9 @@
-package at.cgsit.train.java.mv.firma;
+package at.cgsit.train.java.mv.firma.implementierung;
 
-import at.cgsit.train.java.mv.personen.Kunde;
-import at.cgsit.train.java.mv.personen.Mitarbeiter;
+import at.cgsit.train.java.mv.firma.Firma;
 import at.cgsit.train.java.mv.personen.Person;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
