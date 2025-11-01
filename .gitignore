@@ -1,56 +1,46 @@
+#Maven
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.kotlin
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+.flattened-pom.xml
 
-### Java ###
-*.class
-*.log
-*.ctxt
-hs_err_pid*
-replay_pid*
-
-### IntelliJ ###
-*.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/usage.statistics.xml
-.idea/shelf/
-.idea/httpRequests/
-.idea/gradle.xml
-.idea/modules.xml
-.idea/compiler.xml
-
-# Keep shared IntelliJ settings
-!.idea/codeStyles/
-!.idea/inspectionProfiles/
-
-### VS Code (falls jemand nutzt) ###
-.vscode/
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
+# Eclipse
 .project
-.settings
-.springBeans
-.sts4-cache
+.classpath
+.settings/
+bin/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# IntelliJ
+.idea
+*.ipr
+*.iml
+*.iws
 
-### VS Code ###
-.vscode/
+# NetBeans
+nb-configuration.xml
+
+# Visual Studio Code
+.vscode
+.factorypath
+
+# OSX
+.DS_Store
+
+# Vim
+*.swp
+*.swo
+
+# patch
+*.orig
+*.rej
+
+# Local environment
+.env
+
+# Plugin directory
+/.quarkus/cli/plugins/
 
 ### Mac OS ###
 .DS_Store
