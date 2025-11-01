@@ -1,14 +1,16 @@
 package at.cgsit.train.java.mv;
 
+import at.cgsit.train.java.mv.firma.Firma;
 import at.cgsit.train.java.mv.firma.FirmaBase;
 import at.cgsit.train.java.mv.firma.implementierung.FirmaImplStream;
+import at.cgsit.train.java.mv.personen.Abteilung;
 import at.cgsit.train.java.mv.personen.Kunde;
 import at.cgsit.train.java.mv.personen.Mitarbeiter;
 
 public class Main {
 
   public static void main(String[] args) {
-    FirmaBase firma = new FirmaImplStream(); // Verwenden Sie FirmaImplIterator für die Iterator-basierte Implementierung
+    Firma firma = new FirmaImplStream(); // Verwenden Sie FirmaImplIterator für die Iterator-basierte Implementierung
 
     // Mitarbeiter und Kunden erstellen
     Mitarbeiter m1 = new Mitarbeiter("Anna", "Schmidt", "anna.schmidt@example.com",
@@ -25,9 +27,9 @@ public class Main {
     firma.addPerson(k2);
 
     // Beispielhafte Abfragen:
-    // System.out.println("Durchschnittsgehalt: " + firma.durchschnittsGehalt());
-    // System.out.println("Gesamtumsatz der Kunden: " + firma.gesamtUmsatzKunden());
-    // System.out.println("Personen mit 'Meier': " + firma.findByName("Meier"));
-    // System.out.println("Mitarbeiter (Teilzeit): " + firma.mitarbeiterNachAbteilung(Mitarbeiter.Beschaeftigungsart.TEILZEIT));
+    System.out.println("Durchschnittsgehalt: " + firma.durchschnittsGehalt());
+    System.out.println("Gesamtumsatz der Kunden: " + firma.gesamtUmsatzKunden());
+    System.out.println("Personen mit 'Meier': " + firma.findByName("Meier"));
+    System.out.println("Mitarbeiter (Teilzeit): " + firma.mitarbeiterEinerAbteilung(Abteilung.IT));
   }
 }

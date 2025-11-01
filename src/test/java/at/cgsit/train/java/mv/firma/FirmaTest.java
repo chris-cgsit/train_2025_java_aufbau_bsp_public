@@ -66,7 +66,7 @@ public class FirmaTest {
 
     @Test
     void testDurchschnittsGehaltMitIterator() {
-        // Erwarteter Durchschnittsgehalt: (3000 + 4000 + 2000 + 5000 + 1000) / 5 = 3000
+
         double erwartetesDurchschnittsGehalt = (3000 + 4000 + 2000 + 5000 + 1000) / 5.0;
 
         // Teste die Methode durchschnittsGehalt
