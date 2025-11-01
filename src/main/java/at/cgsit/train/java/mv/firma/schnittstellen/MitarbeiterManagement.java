@@ -1,4 +1,4 @@
-package at.cgsit.train.java.mv.firma;
+package at.cgsit.train.java.mv.firma.schnittstellen;
 
 import at.cgsit.train.java.mv.personen.Mitarbeiter;
 
