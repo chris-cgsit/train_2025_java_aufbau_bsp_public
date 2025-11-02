@@ -36,7 +36,7 @@
 
     <build>
         <plugins>
-            <!-- --release 25 -->
+            <!-- release 25 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
