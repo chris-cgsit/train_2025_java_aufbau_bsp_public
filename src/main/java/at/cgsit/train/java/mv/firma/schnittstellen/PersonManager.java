@@ -40,5 +40,5 @@ public interface PersonManager {
      * @param teil Ein Teilstring, der im Namen der Person gesucht werden soll.
      * @return Eine Liste von Personen, deren Namen den Teilstring enthalten.
      */
-    List<Person> findByName(String teil);
+    List<Person> findByNachname(String teil);
 }

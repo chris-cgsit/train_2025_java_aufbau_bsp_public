@@ -58,7 +58,7 @@ public class FirmaImplIterator extends Firma {
     }
 
   @Override
-  public List<Person> findByName(String teil) {
+  public List<Person> findByNachname(String teil) {
     // result sammelt alle passenden Personen.
     List<Person> result = new ArrayList<>();
 
@@ -72,12 +72,30 @@ public class FirmaImplIterator extends Firma {
     String suchbegriff = teil.toLowerCase();
 
     for (Person person : personen) {
-      String vollname = (person.getVorname() + " " + person.getNachname()).toLowerCase();
+      // String vollname = (person.getVorname() + " " + person.getNachname()).toLowerCase();
+      // wir vereinfachen das hier damit wir nur mal nach dem Nachnamen suchen.
 
-      if (vollname.contains(suchbegriff)) {
+      // Nachnamen immer in Kleinbuchstaben konvertieren
+      String nachnameLowerCase = person.getNachname().toLowerCase();
+
+      // Suchbegriff ebenfalls immer in Kleinbuchstaben konvertieren!
+      String suchbegriffLowerCase = suchbegriff.toLowerCase();
+
+      // Jetzt vergleichen wir beides Case-Insensitive
+      if (nachnameLowerCase.contains(suchbegriffLowerCase)) {
         result.add(person);
       }
     }
+
+    // TIPP: 1. Weiterführende Dokumenataton
+    // Die Apache Java Library: Apache Commons Lang hat so eine Methode,
+    // aber dafür müssten wir eine externe Abhängigkeit dafür erzeugen. Mit Maven kein Problem
+    // aber wir wollen hier einfach bleiben und Java Native
+    // StringUtils.containsIgnoreCase(str, searchStr)
+
+    // TIPP: 2. equals Ignore case
+    // wollen wir nur den ganzen Nachnamen Haben mit ignore Case dann wäre eine java Methode verfügbar
+    // suchbegriff.equalsIgnoreCase( person.getNachname());
 
     return result;
   }

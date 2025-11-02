@@ -71,20 +71,19 @@ public class FirmaImplStream extends Firma implements PersonManager, Mitarbeiter
 
 
   @Override
-    public Optional<Person> findById(String id) {
-        return personen.stream()
-                       .filter(person -> person.getId().equals(id))
-                       .findFirst();
-    }
+  public Optional<Person> findById(String id) {
+    return personen.stream()
+        .filter(person -> person.getId().equals(id))
+        .findFirst();
+  }
 
-    @Override
-    public List<Person> findByName(String teil) {
-        return personen.stream()
-                       .filter(person -> (person.getVorname() + " " + person.getNachname())
-                                         .toLowerCase()
-                                         .contains(teil.toLowerCase()))
-                       .collect(Collectors.toList());
-    }
+  @Override
+  public List<Person> findByNachname(String teil) {
+    // CGS : ich habe die suche vereinfacht auf suche Nachname
+    return personen.stream()
+        .filter(person -> (person.getNachname()).toLowerCase().contains(teil.toLowerCase()))
+        .collect(Collectors.toList());
+  }
 
 
   // Listet alle Mitarbeiter einer bestimmten Abteilung auf

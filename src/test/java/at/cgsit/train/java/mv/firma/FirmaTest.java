@@ -1,11 +1,9 @@
 package at.cgsit.train.java.mv.firma;
 
-import at.cgsit.train.java.mv.firma.implementierung.FirmaImplStream;
 import at.cgsit.train.java.mv.personen.Abteilung;
 import at.cgsit.train.java.mv.personen.Kunde;
 import at.cgsit.train.java.mv.personen.Mitarbeiter;
 import at.cgsit.train.java.mv.personen.Person;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -159,21 +157,21 @@ public abstract class FirmaTest {
   @Test
   void testFindByName() {
     // Suche nach einem Teilstring
-    List<Person> ergebnis = firma.findByName("Anna");
+    List<Person> ergebnis = firma.findByNachname("Schmidt");
     assertEquals(1, ergebnis.size());
-    assertEquals("Anna", ergebnis.get(0).getVorname());
+    assertEquals("Schmidt", ergebnis.getFirst().getNachname());
 
     // Suche nach einem anderen Teilstring
-    ergebnis = firma.findByName("Müller");
+    ergebnis = firma.findByNachname("Müller");
     assertEquals(1, ergebnis.size());
-    assertEquals("Bernd", ergebnis.get(0).getVorname());
+    assertEquals("Müller", ergebnis.get(0).getNachname());
 
     // Suche nach einem nicht existierenden Namen
-    ergebnis = firma.findByName("NichtVorhanden");
+    ergebnis = firma.findByNachname("NichtVorhanden");
     assertEquals(0, ergebnis.size());
 
     // Suche mit leerem String
-    ergebnis = firma.findByName("");
+    ergebnis = firma.findByNachname("");
     assertEquals(0, ergebnis.size());
   }
 
