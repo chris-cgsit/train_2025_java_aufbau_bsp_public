@@ -22,10 +22,19 @@ public class Mitarbeiter extends Person {
     // Konstruktor
     public Mitarbeiter(String vorname, String nachname, String email, 
                         Beschaeftigungsart beschaeftigungsart, double gehalt) {
-        super(vorname, nachname, email);
-        this.beschaeftigungsart = beschaeftigungsart;
-        this.gehalt = gehalt;
+      // default ist Marketing
+      // wir geben weiter an den zentralen Konstruktor mit Marketing default
+      this(vorname,nachname, email, Abteilung.MARKETING, beschaeftigungsart, gehalt);
     }
+
+  public Mitarbeiter(String vorname, String nachname, String email, Abteilung abteilung,
+                     Beschaeftigungsart beschaeftigungsart, double gehalt) {
+    super(vorname, nachname, email);
+    this.abteilung = abteilung;
+    this.beschaeftigungsart = beschaeftigungsart;
+    this.gehalt = gehalt;
+  }
+
 
     // Getter und Setter
     public Beschaeftigungsart getBeschaeftigungsart() {

@@ -10,6 +10,7 @@ import at.cgsit.train.java.mv.personen.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -21,7 +22,7 @@ public class Main {
     // Mitarbeiter und Kunden erstellen
     Mitarbeiter m1 = new Mitarbeiter("Anna", "Schmidt", "anna.schmidt@example.com",
         Mitarbeiter.Beschaeftigungsart.VOLLZEIT, 4000);
-    Mitarbeiter m2 = new Mitarbeiter("Peter", "Müller", "peter.mueller@example.com",
+    Mitarbeiter m2 = new Mitarbeiter("Peter", "Müller", "peter.mueller@example.com", Abteilung.IT,
         Mitarbeiter.Beschaeftigungsart.TEILZEIT, 2000);
     Kunde k1 = new Kunde("Franz", "Kaiser", "franz.kaiser@example.com", "K-2025-001", 50000);
     Kunde k2 = new Kunde("Sabine", "Meier", "sabine.meier@example.com", "K-2025-002", 75000);
@@ -70,6 +71,16 @@ public class Main {
     // System.out.println("Gesamtumsatz der Kunden: " + firma.gesamtUmsatzKunden());
     System.out.println("Personen mit 'Meier': " + firma.findByNachname("Meier"));
     System.out.println("Mitarbeiter (Teilzeit): " + firma.mitarbeiterEinerAbteilung(Abteilung.IT));
+
+    Map<Abteilung, Long> abteilungLongMap = firma.anzahlMitarbeiterProAbteilung();
+
+    // einfache ausgabe der Mitarbeiteranzahl je Abteilung
+    for (Map.Entry<Abteilung, Long> entry : abteilungLongMap.entrySet()) {
+      Abteilung abteilung = entry.getKey();
+      Long count = entry.getValue();
+      System.out.printf("Abteilung %s hat %d Mitarbeiter%n", abteilung, count);
+    }
+
 
     // --- Interaktiver Teil (wie im vorherigen Beispiel) ---
     // Dies ist nur zur Demonstration, um die Funktionalität zu zeigen
