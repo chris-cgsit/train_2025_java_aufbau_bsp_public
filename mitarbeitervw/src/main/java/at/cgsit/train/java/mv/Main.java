@@ -8,10 +8,7 @@ import at.cgsit.train.java.mv.personen.Kunde;
 import at.cgsit.train.java.mv.personen.Mitarbeiter;
 import at.cgsit.train.java.mv.personen.Person;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -99,4 +96,17 @@ public class Main {
     scanner.close();
 
   }
+
+
+    static void dummy() {
+
+      List<String> namen = List.of("Anna", "Bob", "Chris"); // Erzeugt eine unveränderliche Liste
+
+      Iterator<String> it = namen.iterator();               // Iterator abrufen
+      while (it.hasNext()) {                               // Solange weitere Elemente vorhanden sind
+        String name = it.next();                          // Nächstes Element abrufen
+        System.out.println(name);                         // Ausgabe des aktuellen Elements
+      }
+  }
+
 }

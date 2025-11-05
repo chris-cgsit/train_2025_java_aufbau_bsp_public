@@ -2,12 +2,7 @@ package at.cgsit.train.java.mv.firma;
 
 import at.cgsit.train.java.mv.firma.schnittstellen.MitarbeiterManagement;
 import at.cgsit.train.java.mv.firma.schnittstellen.PersonManager;
-import at.cgsit.train.java.mv.personen.Kunde;
-import at.cgsit.train.java.mv.personen.Mitarbeiter;
 import at.cgsit.train.java.mv.personen.Person;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Klasse Firma verwaltet eine Liste von Personen (Mitarbeiter und Kunden).
