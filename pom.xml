@@ -22,6 +22,7 @@
         <module>java_collections</module>
         <module>chat-system</module>
         <module>chat-simple-server</module>
+        <module>simple_net_socket</module>
         <!--module>persistence</module -->
     </modules>
 
