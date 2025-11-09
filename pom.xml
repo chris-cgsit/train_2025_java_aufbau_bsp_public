@@ -20,6 +20,7 @@
     <modules>
         <module>mitarbeitervw</module>
         <module>java_collections</module>
+        <module>chat-system</module>
         <!--module>persistence</module -->
     </modules>
 

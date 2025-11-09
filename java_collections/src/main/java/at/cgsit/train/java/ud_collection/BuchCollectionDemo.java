@@ -33,6 +33,11 @@ public class BuchCollectionDemo {
         collection.add(new Buch(3, "Algorithmen Design"));
         collection.add(new Buch(4, "Java Collections Framework"));
 
+        collection.forEach(System.out::println);
+
+        collection.size();
+        System.out.printf("Collection size: %s \n", collection.size());
+
         // Duplikat hinzufügen
         collection.add(new Buch(1, "Java Grundlagen"));
 
