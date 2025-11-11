@@ -8,6 +8,7 @@ import at.cgsit.train.java.chatsys.model.SystemUserCreator;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 /**
@@ -80,9 +81,30 @@ public class ChatServer implements ChatInterface, UserManagement {
         = users.values().stream()
         .sorted(Comparator.comparing(ChatUser::getUsername,  String.CASE_INSENSITIVE_ORDER))
         .toList();
+
+    Consumer<ChatUser> funktion = new Consumer<ChatUser>() {
+      @Override
+      public void accept(ChatUser chatUser) {
+        System.out.println(chatUser.getUsername());
+        System.out.println(chatUser.getEmail());
+      }
+    };
+
+    Consumer<ChatUser> funktion2 = this::printAll;
+
+    // result.forEach(this::printAll);
+    result.forEach( funktion );
+
+    result.forEach(this::printAll);
+
     return  result;
   }
 
+  private String printAll( ChatUser chatUser ) {
+    System.out.println(chatUser.getUsername());
+    System.out.println(chatUser.getEmail());
+    return "";
+  }
 
   /** Einzige Send-Methode: akzeptiert fertige ChatMessage. */
   @Override
