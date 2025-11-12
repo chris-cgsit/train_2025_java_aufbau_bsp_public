@@ -57,25 +57,37 @@ public class Peer2PeerChat {
 
     // ----------------- Server-Modus -----------------
 
-    private static void runServer(String[] args) throws IOException {
-        if (args.length < 3) {
-            System.out.println("Server-Verwendung: java SimpleSocketChat server <meinName> <listenPort>");
-            return;
-        }
-
-        String myName = args[1];
-        int listenPort = Integer.parseInt(args[2]);
-
-        // moderneres try socket .. für socket close bei exceiotn
-        // der server socket wartet auf clients mit dem accept methode
-        try (ServerSocket serverSocket = new ServerSocket(listenPort)) {
-            System.out.println("[" + myName + "] lauscht auf Port " + listenPort + " ...");
-            Socket socket = serverSocket.accept();
-            System.out.println("Verbindung von " + socket.getRemoteSocketAddress());
-
-            startChat(myName, socket);
-        }
+  private static void runServer(String[] args) throws IOException {
+    if (args.length < 3) {
+      System.out.println("Server-Verwendung: java SimpleSocketChat server <meinName> <listenPort>");
+      return;
     }
+
+    String myName = args[1];
+    int listenPort = Integer.parseInt(args[2]);
+
+    try (ServerSocket serverSocket = new ServerSocket(listenPort)) {
+      System.out.println("[" + myName + "] Lauscht dauerhaft auf Port " + listenPort + " ...");
+
+      // server akzeptiert nacheinander beliebig viele Clients, aber nie gleichzeitig!
+      while (true) {
+        System.out.println("Warte auf neuen Client ...");
+        try {
+          Socket socket = serverSocket.accept();
+          System.out.println("Verbindung von " + socket.getRemoteSocketAddress());
+
+          // chat für *diesen* Client ausführen
+          startChat(myName, socket);
+
+          // sobald startChat beendet wird:
+          System.out.println("Client getrennt. Warten auf nächsten...");
+        } catch (IOException e) {
+          System.out.println("Fehler beim Client-Handling: " + e.getMessage());
+        }
+      }
+    }
+  }
+
 
     // ----------------- Client-Modus -----------------
 
