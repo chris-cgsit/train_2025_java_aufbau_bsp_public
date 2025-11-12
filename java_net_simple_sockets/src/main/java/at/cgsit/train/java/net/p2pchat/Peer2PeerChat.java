@@ -2,124 +2,113 @@ package at.cgsit.train.java.net.p2pchat;
 
 import java.io.*;
 import java.net.*;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
-/**
- * Peer-to-Peer 1:1 Chat <br/>
- * (beide Seiten sind Server und Client).
- *
- * Start auf zwei Terminals (Beispiel):
- *   statt localhost die
- *   Terminal A: java PeerChatUser Alice 5000 localhost 5001 Bob
- *   Terminal B: java PeerChatUser Bob   5001 localhost 5000 Alice
- *
- * Befehle im Chat:
- *   exit  -> Chat beenden
- */
 public class Peer2PeerChat {
 
-    // ANSI-Farben (funktioniert meistens)
-    private static final String RESET = "\u001B[0m";
-    private static final String FG_SELF = "\u001B[36m";   // Cyan
-    private static final String FG_PEER = "\u001B[35m";   // Magenta
-    private static final String FG_SYS  = "\u001B[90m";   // Grau
-
-    private static final DateTimeFormatter TS = DateTimeFormatter.ofPattern("HH:mm:ss");
-
     public static void main(String[] args) {
-        if (args.length < 5) {
-            // # Args: myName listenPort targetHost targetPort peerName [bindHost]
-            System.out.println("Verwendung: java Peer2PeerChat <meinName> <listenPort> <targetHost> <targetPort> <peerName>");
-            System.out.println("Beispiel A: java Peer2PeerChat Chris 5000 0.0.0.0 5001 Bob 0.0.0.0");
-            System.out.println("Beispiel B: java Peer2PeerChat Frank 5001 0.0.0.0 5000 Alice 0.0.0.0");
+        if (args.length < 1) {
+            System.out.println("Verwendung:");
+            System.out.println("  Server: java SimpleSocketChat server <meinName> <listenPort>");
+            System.out.println("  Client: java SimpleSocketChat client <meinName> <host> <port>");
+            System.out.println();
+            System.out.println("Beispiele:");
+            System.out.println("  Server: java SimpleSocketChat server ServerUser 5000");
+            System.out.println("  Client: java SimpleSocketChat client ClientUser 176.28.18.8 5000");
             return;
         }
 
-        final String myName = args[0];
-        final int listenPort = Integer.parseInt(args[1]);
-        final String targetHost = args[2];
-        final int targetPort = Integer.parseInt(args[3]);
-        final String peerName = args[4];
+        String mode = args[0];
 
-        // optionales 6. Argument
-        // 0.0.0.0 = auf allen Interfaces lauschen (auch über LAN erreichbar).
-        final String bindHost = (args.length >= 6) ? args[5] : "0.0.0.0";
-        final Thread listenerThread = new Thread(() -> listenAndReceive(myName, bindHost, listenPort, peerName));
-        listenerThread.setName("listener-" + listenPort);
-        listenerThread.start();
-
-        // Kleiner Delay/Sleep, damit der Listener hochfährt, bevor wir verbinden
-        try { Thread.sleep(600); } catch (InterruptedException ignored) {}
-
-        connectAndSend(myName, targetHost, targetPort, peerName);
-
-        // Aufräumen
-        try { listenerThread.join(500); } catch (InterruptedException ignored) {}
-        logSys("Beendet.");
-    }
-
-  // listenAndReceive mit bind host .. wo lauschen
-  private static void listenAndReceive(String myName, String bindHost, int listenPort, String peerName) {
-    try (ServerSocket serverSocket = new ServerSocket()) {
-      serverSocket.bind(new InetSocketAddress(bindHost, listenPort)); // "0.0.0.0" = alle Interfaces
-      logSys("[" + myName + "] lauscht auf " + bindHost + ":" + listenPort + " …");
-      try (Socket socket = serverSocket.accept();
-           BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
-        logSys("Eingehende Verbindung: " + socket.getInetAddress() + ":" + socket.getPort());
-        String line;
-        while ((line = in.readLine()) != null) {
-          printPeer(peerName, line);
-        }
-        logSys("Gegenstelle hat die Verbindung geschlossen.");
-      }
-    } catch (IOException e) {
-      logSys("Listener-Fehler: " + e.getMessage());
-    }
-  }
-
-
-    private static void connectAndSend(String myName, String host, int port, String peerName) {
-        try (Socket socket = new Socket(host, port);
-             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-             BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in))) {
-
-            logSys("Verbunden zu " + host + ":" + port + " (Peer: " + peerName + ")");
-            System.out.println(FG_SYS + "Tippe Nachrichten. 'exit' beendet." + RESET);
-
-            String line;
-            while (true) {
-                System.out.print(prompt(myName));
-                line = userIn.readLine();
-                if (line == null || "exit".equalsIgnoreCase(line.trim())) {
-                    break;
-                }
-                out.println(line);
-                printSelf(myName, line);
+        try {
+            if ("server".equalsIgnoreCase(mode)) {
+                runServer(args);
+            } else if ("client".equalsIgnoreCase(mode)) {
+                runClient(args);
+            } else {
+                System.out.println("Unbekannter Modus: " + mode);
             }
         } catch (IOException e) {
-            logSys("Sende-Fehler: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    // ---------- hübsche Ausgabe ----------
+    // ----------------- Server-Modus -----------------
 
-    private static String now() { return LocalTime.now().format(TS); }
+    private static void runServer(String[] args) throws IOException {
+        if (args.length < 3) {
+            System.out.println("Server-Verwendung: java SimpleSocketChat server <meinName> <listenPort>");
+            return;
+        }
 
-    private static void printSelf(String myName, String msg) {
-        System.out.println(FG_SELF + "[" + now() + "] " + myName + ": " + msg + RESET);
+        String myName = args[1];
+        int listenPort = Integer.parseInt(args[2]);
+
+        try (ServerSocket serverSocket = new ServerSocket(listenPort)) {
+            System.out.println("[" + myName + "] lauscht auf Port " + listenPort + " ...");
+            Socket socket = serverSocket.accept();
+            System.out.println("Verbindung von " + socket.getRemoteSocketAddress());
+
+            startChat(myName, socket);
+        }
     }
 
-    private static void printPeer(String peerName, String msg) {
-        System.out.println(FG_PEER + "[" + now() + "] " + peerName + ": " + msg + RESET);
+    // ----------------- Client-Modus -----------------
+
+    private static void runClient(String[] args) throws IOException {
+        if (args.length < 4) {
+            System.out.println("Client-Verwendung: java SimpleSocketChat client <meinName> <host> <port>");
+            return;
+        }
+
+        String myName = args[1];
+        String host = args[2];
+        int port = Integer.parseInt(args[3]);
+
+        System.out.println("[" + myName + "] verbindet zu " + host + ":" + port + " ...");
+
+        Socket socket = new Socket(host, port);
+        System.out.println("Verbunden zu " + socket.getRemoteSocketAddress());
+
+        startChat(myName, socket);
     }
 
-    private static void logSys(String msg) {
-        System.out.println(FG_SYS + "[" + now() + "] " + msg + RESET);
-    }
+    // ----------------- Gemeinsame Chat-Logik -----------------
 
-    private static String prompt(String myName) {
-        return FG_SELF + myName + "> " + RESET;
+    private static void startChat(String myName, Socket socket) {
+        try (socket;
+             BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             PrintWriter socketOut = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader consoleIn = new BufferedReader(new InputStreamReader(System.in))) {
+
+            // Thread zum Empfangen
+            Thread receiveThread = new Thread(() -> {
+                try {
+                    String line;
+                    while ((line = socketIn.readLine()) != null) {
+                        System.out.println("Peer: " + line);
+                    }
+                    System.out.println("Verbindung wurde von der Gegenstelle geschlossen.");
+                } catch (IOException e) {
+                    System.out.println("Empfangsfehler: " + e.getMessage());
+                }
+            });
+            receiveThread.setDaemon(true);
+            receiveThread.start();
+
+            System.out.println("Chat gestartet. Tippe Nachrichten, 'exit' zum Beenden.");
+
+            String line;
+            while ((line = consoleIn.readLine()) != null) {
+                if ("exit".equalsIgnoreCase(line.trim())) {
+                    break;
+                }
+                socketOut.println(myName + ": " + line);
+            }
+
+            System.out.println("Chat beendet.");
+
+        } catch (IOException e) {
+            System.out.println("Chat-Fehler: " + e.getMessage());
+        }
     }
 }
