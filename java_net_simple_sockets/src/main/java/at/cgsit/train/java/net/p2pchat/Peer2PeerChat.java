@@ -3,6 +3,27 @@ package at.cgsit.train.java.net.p2pchat;
 import java.io.*;
 import java.net.*;
 
+/**
+ * The Peer2PeerChat class implements a simple peer-to-peer chat application
+ * that can operate in either server or client mode. The application uses
+ * sockets for communication and allows users to exchange text messages.
+ *
+ * In server mode, it listens for incoming connections on a specified port.
+ * In client mode, it connects to a specified server and port.
+ *
+ * Usage:
+ * - Server: java SimpleSocketChat server <myName> <listenPort>
+ * - Client: java SimpleSocketChat client <myName> <host> <port>
+ *
+ * Examples:
+ * - Server: java SimpleSocketChat server ServerUser 5000
+ * - Client: java SimpleSocketChat client ClientUser 176.28.18.8 5000
+ *
+ * The communication is :
+ * - A dedicated thread to receive messages.
+ * - A console input system to send messages.
+ * - A "exit" command to close the chat session.
+ */
 public class Peer2PeerChat {
 
     public static void main(String[] args) {
@@ -19,6 +40,8 @@ public class Peer2PeerChat {
 
         String mode = args[0];
 
+        // entscheide server oder client mode.
+        // der server soll auf clients warten bis sie connecten. der client sucht den server dann
         try {
             if ("server".equalsIgnoreCase(mode)) {
                 runServer(args);
@@ -43,6 +66,8 @@ public class Peer2PeerChat {
         String myName = args[1];
         int listenPort = Integer.parseInt(args[2]);
 
+        // moderneres try socket .. für socket close bei exceiotn
+        // der server socket wartet auf clients mit dem accept methode
         try (ServerSocket serverSocket = new ServerSocket(listenPort)) {
             System.out.println("[" + myName + "] lauscht auf Port " + listenPort + " ...");
             Socket socket = serverSocket.accept();
@@ -66,21 +91,25 @@ public class Peer2PeerChat {
 
         System.out.println("[" + myName + "] verbindet zu " + host + ":" + port + " ...");
 
+        // der client sucht den server und verbindet sich einfach
         Socket socket = new Socket(host, port);
         System.out.println("Verbunden zu " + socket.getRemoteSocketAddress());
 
         startChat(myName, socket);
     }
 
-    // ----------------- Gemeinsame Chat-Logik -----------------
-
+    // START ----------------- Gemeinsame Chat-Logik -----------------
+    // wir lesen incommint aus socketIn je LINE !!
+    // wir schreiben ausgehend auf socket out --je LINE
+    // wir lesen von der Console input vom user ..
+    // und wir schreiben auf die console den server output raus
     private static void startChat(String myName, Socket socket) {
         try (socket;
              BufferedReader socketIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
              PrintWriter socketOut = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader consoleIn = new BufferedReader(new InputStreamReader(System.in))) {
 
-            // Thread zum Empfangen
+            // Thread zum Empfangen läuft im hintergrund und schreibt uns auf die console immer wenn was kommt
             Thread receiveThread = new Thread(() -> {
                 try {
                     String line;
@@ -95,6 +124,9 @@ public class Peer2PeerChat {
             receiveThread.setDaemon(true);
             receiveThread.start();
 
+            // hier im haupt thread machen wir weiter und lesen den user input und senden es dem server bzw
+            // der socket gegenstelle.
+            // wenn ein socket verbunden ist, dann ist er bi-direktonal
             System.out.println("Chat gestartet. Tippe Nachrichten, 'exit' zum Beenden.");
 
             String line;

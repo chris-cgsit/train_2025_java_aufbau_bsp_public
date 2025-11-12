@@ -1,0 +1,35 @@
+@startuml
+title Multi-Client Chat – Ablaufdiagramm
+
+actor Client1
+actor Client2
+actor ClientN
+
+participant "ChatServer" as S
+
+== Server Start ==
+S -> S: serverSocket = new ServerSocket(port)
+S -> S: while(true):
+S -> S:   client = accept()
+
+== Client verbindet ==
+Client1 -> S: TCP Connect
+S -> S: starte ClientThread(client)
+
+Client2 -> S: TCP Connect
+S -> S: starte ClientThread(client)
+
+ClientN -> S: TCP Connect
+S -> S: starte ClientThread(client)
+
+== Client sendet Nachricht ==
+Client1 -> S: Nachricht senden
+S -> S: empfange Nachricht
+S -> Client2: weiterleiten
+S -> ClientN: weiterleiten
+
+== Clients empfangen ==
+Client2 -> Client2: anzeigen
+ClientN -> ClientN: anzeigen
+
+@enduml

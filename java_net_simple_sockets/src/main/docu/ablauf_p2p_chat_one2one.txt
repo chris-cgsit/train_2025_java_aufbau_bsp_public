@@ -1,0 +1,47 @@
+@startuml
+title Single-Client Chat Server – nacheinander verbundene Clients
+
+actor Client1
+actor Client2
+participant "ChatServer" as S
+
+== Server startet ==
+S -> S: serverSocket = new ServerSocket(5000)
+S -> S: serverSocket.accept()\n(wartet auf Client)
+
+== Client 1 verbindet ==
+Client1 -> S: TCP Connect
+S -> S: Verbindung angenommen
+S -> S: starte ReceiveThread(Client1)
+
+== Nachrichten von Client 1 ==
+Client1 -> S: "Hallo Server"
+S --> Client1: (optional) Echo: "Hallo zurück"
+
+Client1 -> S: "Wie geht's?"
+S --> Client1: Echo oder Verarbeitung
+
+Client1 -> S: "exit"
+S -> S: schließe Socket(Client1)
+
+== Server wartet erneut ==
+S -> S: serverSocket.accept()\n(wartet auf nächsten Client)
+
+== Client 2 verbindet ==
+Client2 -> S: TCP Connect
+S -> S: starte ReceiveThread(Client2)
+
+== Nachrichten von Client 2 ==
+Client2 -> S: "Hi, ich bin Client 2"
+S --> Client2: Echo
+
+Client2 -> S: "Noch eine Nachricht"
+S --> Client2: Echo
+
+Client2 -> S: "exit"
+S -> S: schließe Socket(Client2)
+
+== Ende ==
+S -> S: bleibt im accept() Block\n(bereit für Client 3)
+
+@enduml
