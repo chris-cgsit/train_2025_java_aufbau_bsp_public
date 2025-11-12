@@ -19,6 +19,7 @@ public class Buch {
     return name;
   }
 
+  /*
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -26,11 +27,13 @@ public class Buch {
     Buch buch = (Buch) o;
     return Objects.equals(id, buch.id);
   }
-
+*/
+  /*
   @Override
   public int hashCode() {
     return Objects.hash(id);
   }
+   */
 
   @Override
   public String toString() {

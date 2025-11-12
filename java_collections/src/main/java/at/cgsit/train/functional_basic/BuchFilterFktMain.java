@@ -6,7 +6,14 @@ public class BuchFilterFktMain {
 
   static void main() {
 
-    // Alte Schreibweise vor Java 8.
+    Buch b = new Buch(1, "Java Language");
+
+    BuchFilterInterface filterWithC = new BuchFIImpl();
+
+    boolean trueFor = filterWithC.isTrueFor(b);
+
+
+      // Alte Schreibweise vor Java 8.
     // Wir erstellen eine anonyme Klasse, die die Methode überschreibt.
     // klassich aber etwas viel Code.
     // anonyme Klasse
@@ -31,11 +38,20 @@ public class BuchFilterFktMain {
     // !! Wenn nur eine Zeile Code und Direkt-return, dann Klammern und return weglassen. !!
     BuchFilterInterface filterLambda2 = a -> a.getName() != null;
 
+    // funktions referenz:
+    BuchFilterInterface filterLambdaMethodRef = BuchFilterFktMain::isTrueFor;
+
+    boolean trueForRef = filterLambdaMethodRef.isTrueFor(b);
 
     // Warum Lambdas?
     //    Weniger Code
     //    Besser lesbar
     //    Ideal für Streams & moderne Java-Programmierung
   }
+
+    public static boolean isTrueFor(Buch a) {
+        return false;
+    }
+
 
 }

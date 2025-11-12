@@ -48,6 +48,8 @@ public class ChatDemoMain {
       server.sendMessage(m2);
     } catch (ProfantitatException e) {
       System.out.println("[Server] SENDEN FEHLGESCHLAGEN: " + e.getMessage());
+      // könnte wieder weiter
+      // throw e;
     }
 
     try {

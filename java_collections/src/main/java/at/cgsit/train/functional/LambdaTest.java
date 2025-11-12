@@ -1,6 +1,7 @@
 package at.cgsit.train.functional;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.*;
 
 public class LambdaTest {
@@ -32,7 +33,9 @@ public class LambdaTest {
         List<String> namen = List.of("Anna", "Bob", "Alexander", "Carla");
 
         Predicate<String> beginntMitA = s -> s.startsWith("A");
-        Function<String, String> upper = s -> s.toUpperCase();
+        Function<String, String> upper = s -> {
+            return s.toUpperCase();
+        };
 
         for (String name : namen) {
             if (beginntMitA.test(name)) {

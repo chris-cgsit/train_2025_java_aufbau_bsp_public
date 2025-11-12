@@ -13,6 +13,10 @@ public class FunctionBeispiel {
 
         // 2: Function: Kleinbuchstaben → Großbuchstaben
         Function<String, String> upper = s -> s.toUpperCase();
+
+        // alternativ möglich method reference
+        // Function<String, String> methodRef = String::toUpperCase;
+
         System.out.println(upper.apply("cgs it"));
 
         // 3 Verkettung mit andThen()

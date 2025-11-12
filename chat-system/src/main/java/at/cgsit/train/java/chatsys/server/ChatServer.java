@@ -9,6 +9,7 @@ import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 /**
@@ -34,6 +35,8 @@ public class ChatServer implements ChatInterface, UserManagement {
   */
   private final Map<UUID, ChatUser> users = new ConcurrentHashMap<>();
 
+  Map<Integer, String> intToString = new HashMap<>();
+
   // historie aller Chat Nachrichten die versendet wurden seit dem Server start
   /** Historien-Buckets:
    *  _SYSTEM  -> alle Systemnachrichten
@@ -45,11 +48,13 @@ public class ChatServer implements ChatInterface, UserManagement {
   private static final Set<String> PROFANITIES = Set.of("iditot", "dummkopf", "trottel");
 
   public ChatServer() {
+
     this.systemUser = SystemUserCreator.createSystemUser();
     users.put(systemUser.getId(), systemUser);
     // Buckets anlegen
     histories.put(KEY_SYSTEM,  new ArrayList<>());
     histories.put(KEY_NO_ROOM, new ArrayList<>());
+
   }
 
   /**
@@ -150,8 +155,12 @@ public class ChatServer implements ChatInterface, UserManagement {
       appendToSystemHistory(msg);
       return;
     }
+    Predicate<ChatUser> predicate;
+
+    // this.getHistory().forEach();
+
     if (chatId == null || chatId.isBlank()) {
-      histories.get(KEY_NO_ROOM).add(msg);
+        histories.get(KEY_NO_ROOM).add(msg);
     } else {
       histories.computeIfAbsent(chatId, k -> new ArrayList<>()).add(msg);
     }
