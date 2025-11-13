@@ -6,15 +6,16 @@ import java.io.*;
 import java.net.*;
 
 /**
- * Was passiert im Code?
  *
- *
- * Verbindung warten: Die Methode serverSocket.accept() hält den Server an und wartet, bis ein Client versucht, eine Verbindung herzustellen. Sobald ein Client "anruft", wird eine Socket-Verbindung hergestellt.
- *
- * Empfangen der Daten: Nach der Verbindung liest der Server die eingehenden Daten (Zeile für Zeile) über einen BufferedReader aus dem InputStream des Clients und gibt sie auf der Konsole aus.
- *
- * Sicherheit und Aufräumen: Wir verwenden hier Try-with-Resources (try(...)). Das garantiert, dass die Netzwerkverbindungen (ServerSocket und BufferedReader) automatisch und sicher geschlossen werden, selbst wenn Fehler (IOException) auftreten.
- *
+ * In der aktuellen Implementierung dieses SimpleServer-Codes kann nur ein einziger Client gleichzeitig bedient werden,
+ * und alle weiteren Clients müssen warten.
+ * <br/>
+ * Der Standard: Der ServerSocket-Konstruktor, den Sie hier verwenden (new ServerSocket(port)),
+ * enutzt eine Standard-Warteschlangengröße (Backlog-Wert), die vom Betriebssystem abhängt
+ * (typischerweise liegt dieser Wert oft zwischen 50 und 200).
+ * <br>
+ * Der zweite, dritte oder n-te Client muss warten, bis der erste Client seine Übertragung beendet hat
+ * und die Verbindung geschlossen wird.
  */
 public class SimpleServer {
 
@@ -30,9 +31,12 @@ public class SimpleServer {
       // selbst wenn Fehler (IOException) auftreten.
 
       try (ServerSocket serverSocket = new ServerSocket(port)) {
+
+        // man könnte ein timeout configurieren: Warten maximal 5 Sekunden (5000 ms) auf eine Verbindung
+        // serverSocket.setSoTimeout(5000);
+
         // Die Methode serverSocket.accept() hält den Server an und wartet, bis ein Client versucht, eine Verbindung herzustellen.
         // Sobald ein Client "anruft", wird eine Socket-Verbindung hergestellt.
-
             Socket clientSocket = serverSocket.accept();
             System.out.println("Client verbunden: " + clientSocket.getInetAddress());
 
