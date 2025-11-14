@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,7 +85,7 @@ public class EchoServerWithCommands {
         //   - Validierung (Port-Bereich, Zahlen prüfen)
         
         // Load config from file (Java Properties)
-        var config = new java.util.Properties();
+        Properties config = new java.util.Properties();
         Path configPath = Path.of("server-config.properties");
         int port = 5544;
         Path logFilePath = LOG_FILE_PATH;
