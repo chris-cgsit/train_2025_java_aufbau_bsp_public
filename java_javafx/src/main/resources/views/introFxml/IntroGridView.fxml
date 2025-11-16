@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane hgap="10" stylesheets="@intro.css" vgap="10" xmlns="http://javafx.com/javafx/17"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="introFxml.IntroGridController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
+
+    <!-- Property im GridPane, die nicht mit einem String konfiguriert wird -->
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10"/>
+    </padding>
+    <children>
+        <!-- das Label auf 3 Spalten ausdehnen GridPane.columnSpan ist eine static/attached Property, die für
+            das Label in Bezug auf den GridPane gesetzt wird -->
+        <Label id="lblTitle" text="Willkommen!" GridPane.columnIndex="0" GridPane.columnSpan="3"
+               GridPane.halignment="CENTER" GridPane.rowIndex="0"/>
+        <Label text="Dein Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <!-- das TextFeld soll im Controller über das Member "txtName" verfügbar sein -->
+        <TextField fx:id="txtName" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+
+        <!-- onAction=#onClickButton gibt an, dass diese Controller-Methode beim Klick auf den Button ausgeführt
+            werden soll -->
+        <Button fx:id="btnOk" onAction="#onClickButton" text="OK" userData="OK" GridPane.columnIndex="1"
+                GridPane.rowIndex="2"/>
+        <Button fx:id="btnCancel" onAction="#onClickButton" text="Abbrechen" userData="Cancel" GridPane.columnIndex="2"
+                GridPane.rowIndex="2"/>
+        <ListView fx:id="lvMessages" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+
+
+    </children>
+
+
+</GridPane>
