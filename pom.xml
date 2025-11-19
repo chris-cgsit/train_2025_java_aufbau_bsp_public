@@ -28,6 +28,7 @@
         <module>hue_chatsys</module>
         <module>java_swing_basics</module>
         <module>java_javafx</module>
+        <module>java_jdbc</module>
     </modules>
 
     <dependencyManagement>

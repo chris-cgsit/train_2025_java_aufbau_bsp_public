@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -83,7 +84,9 @@ public class EchoServerWithCommands {
         //   - Grundlagen von Properties-Dateien
         //   - Unterschied Arbeitsverzeichnis / Classpath
         //   - Validierung (Port-Bereich, Zahlen prüfen)
-        
+
+        String port1 = System.getenv("port");
+
         // Load config from file (Java Properties)
         Properties config = new java.util.Properties();
         Path configPath = Path.of("server-config.properties");
@@ -93,7 +96,7 @@ public class EchoServerWithCommands {
         try {
             // 1) Externe Config im Arbeitsverzeichnis versuchen
             if (Files.exists(configPath)) {
-                try (var reader = Files.newBufferedReader(configPath)) {
+                try (var reader = Files.newBufferedReader(configPath, StandardCharsets.UTF_8)) {
                     config.load(reader);
                 }
             } else {
@@ -127,6 +130,7 @@ public class EchoServerWithCommands {
                 logFilePath = Path.of(logfileProp.trim());
             }
         } catch (IOException e) {
+            e.printStackTrace();
             System.err.println("Failed to load config. Using defaults. " + e.getMessage());
         }
 
