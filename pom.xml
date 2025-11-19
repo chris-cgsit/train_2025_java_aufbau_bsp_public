@@ -29,6 +29,7 @@
         <module>java_swing_basics</module>
         <module>java_javafx</module>
         <module>java_jdbc</module>
+        <module>java_obj_serialisierung</module>
     </modules>
 
     <dependencyManagement>
