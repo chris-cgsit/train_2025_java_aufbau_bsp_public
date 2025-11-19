@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class TestDBEins {
+public class TestInsert {
 
     static void main() throws SQLException {
 
@@ -10,7 +10,7 @@ public class TestDBEins {
         entity.setAktiv(Boolean.TRUE);
         entity.setName("testone");
 
-        TestDBEins.insertTest(conn,entity);
+        TestInsert.insertTest(conn,entity);
     }
 
     public static void insertTest(Connection conn, TestEntity entity) throws SQLException {

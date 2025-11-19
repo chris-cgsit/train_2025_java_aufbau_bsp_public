@@ -1,12 +1,12 @@
 import java.sql.*;
 
-public class TestReadDb {
+public class TestReadById {
 
     static void main() throws SQLException {
 
         Connection conn = MakeDbConnection.makeMyConnection();
 
-        TestReadDb myInstance = new TestReadDb();
+        TestReadById myInstance = new TestReadById();
         TestEntity entity = myInstance.loadTest(conn, 2);
 
         if (entity != null) {
