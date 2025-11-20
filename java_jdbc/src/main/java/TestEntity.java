@@ -7,6 +7,15 @@ import java.time.Instant;
  *     aktiv BOOLEAN,
  *     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  * );
+ *
+ * POSTGRES
+ * CREATE TABLE test_entity (
+ *     id BIGSERIAL PRIMARY KEY,
+ *     name VARCHAR(200) NOT NULL,
+ *     aktiv BOOLEAN,
+ *     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ * );
+ *
  */
 public class TestEntity implements Comparable {
     private Long id;
