@@ -1,6 +1,6 @@
-package eindimensional;
+package at.cgsit.java.arrays.mit.eindimensional;
 
-import inputHilfe.InputUtil;
+import at.cgsit.java.arrays.mit.inputHilfe.InputUtil;
 
 import java.util.Arrays;
 import java.util.Random;

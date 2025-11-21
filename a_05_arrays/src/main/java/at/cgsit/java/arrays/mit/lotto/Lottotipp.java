@@ -1,4 +1,4 @@
-package lotto;
+package at.cgsit.java.arrays.mit.lotto;
 
 import java.util.Arrays;
 import java.util.Random;

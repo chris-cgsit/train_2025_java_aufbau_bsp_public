@@ -1,4 +1,4 @@
-package personen;
+package at.cgsit.java.arrays.mit.personen;
 
 public class PersonenMainSimple {
     public static void main(String[] args) {

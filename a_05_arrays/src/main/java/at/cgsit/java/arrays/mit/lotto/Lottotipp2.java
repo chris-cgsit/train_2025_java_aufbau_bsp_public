@@ -1,4 +1,4 @@
-package lotto;
+package at.cgsit.java.arrays.mit.lotto;
 
 public class Lottotipp2 {
     // statt einzelner Werte

@@ -1,4 +1,4 @@
-package zweidimensional;
+package at.cgsit.java.arrays.mit.zweidimensional;
 
 import java.util.Random;
 

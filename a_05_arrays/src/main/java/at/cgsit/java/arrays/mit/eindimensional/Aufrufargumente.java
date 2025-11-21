@@ -1,4 +1,4 @@
-package eindimensional;
+package at.cgsit.java.arrays.mit.eindimensional;
 
 
 // Aufrufargumente übergeben:

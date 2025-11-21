@@ -1,4 +1,4 @@
-package inputHilfe;
+package at.cgsit.java.arrays.mit.inputHilfe;
 
 import java.text.NumberFormat;
 import java.util.Scanner;

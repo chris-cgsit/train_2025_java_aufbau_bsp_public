@@ -1,4 +1,4 @@
-package lotto;
+package at.cgsit.java.arrays.mit.lotto;
 
 public class LottoProgramm2 {
     public static void main(String[] args) {

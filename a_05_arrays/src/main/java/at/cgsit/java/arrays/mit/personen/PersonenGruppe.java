@@ -1,4 +1,4 @@
-package personen;
+package at.cgsit.java.arrays.mit.personen;
 
 /**
  * Diese Klasse kapselt eine Gruppe von Person-Objekten in einem Array
