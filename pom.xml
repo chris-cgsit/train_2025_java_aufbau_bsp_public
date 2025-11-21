@@ -22,14 +22,14 @@
         <module>a_40_collections</module>
         <module>chat-system</module>
         <module>chat-simple-server</module>
-        <module>simple_net_socket</module>
-        <module>java_file_io</module>
-        <module>java_net_simple_sockets</module>
+        <module>a_66_simple_net_socket</module>
+        <module>a_60_java_file_io</module>
+        <module>a_67_net_simple_sockets</module>
         <module>hue_chatsys</module>
-        <module>java_swing_basics</module>
-        <module>java_javafx</module>
-        <module>java_jdbc</module>
-        <module>java_obj_serialisierung</module>
+        <module>b_18_swing_basics</module>
+        <module>b_20_gui_javafx</module>
+        <module>a_70_java_jdbc</module>
+        <module>a_52_obj_serialisierung</module>
         <module>a_02_java_numbers</module>
         <module>hue_04_mitarbeiterverwaltung</module>
         <module>hue_06_json_jdbc_product</module>
