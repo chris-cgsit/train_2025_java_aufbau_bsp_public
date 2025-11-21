@@ -36,6 +36,9 @@
         <module>a_10_klassen</module>
         <module>a_20_interfaces</module>
         <module>a_05_arrays</module>
+        <module>a_25_vererbung</module>
+        <module>a_28_exceptions</module>
+        <module>a_45_streams_functional</module>
     </modules>
 
     <dependencyManagement>
