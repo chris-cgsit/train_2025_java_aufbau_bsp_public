@@ -7,11 +7,15 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../../abgaben/elisabeth/Chatserver (1)/Chatserver/pom.xml" />
         <option value="$PROJECT_DIR$/../../import_test/pom.xml" />
+        <option value="$PROJECT_DIR$/../teehaus_test/pom.xml" />
+        <option value="$PROJECT_DIR$/../hue_produktverwaltung/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/../../abgaben/elisabeth/Chatserver (1)/Chatserver/pom.xml" />
+        <option value="$PROJECT_DIR$/../hue_produktverwaltung/pom.xml" />
+        <option value="$PROJECT_DIR$/../teehaus_test/pom.xml" />
         <option value="$PROJECT_DIR$/../../import_test/pom.xml" />
       </set>
     </option>
