@@ -69,3 +69,11 @@ Sie können die Implementierung der Suchlogik über die Umgebungsvariable `FIRMA
 | `FIRMA_IMPL=I` | Iterator-basierte Suche | 
 
 **Beispiel (Linux/macOS): Stream-Implementierung verwenden**
+
+siehe Buch Tipps:
+[CGS Buchtips](https://cgs.at/book-suggestions/)
+[CGS Hardware tips](https://cgs.at/cgs-it-amazon-affiliate-link)
+[CGS IT Solutions](https://cgs.at/)
+
+
+
