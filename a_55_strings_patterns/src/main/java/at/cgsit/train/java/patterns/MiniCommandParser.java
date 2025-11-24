@@ -1,4 +1,4 @@
-package at.cgsit.train.java.huechatsys;
+package at.cgsit.train.java.patterns;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

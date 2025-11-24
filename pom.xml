@@ -39,6 +39,8 @@
         <module>hue_05_chat-system</module>
         <module>hue_05_01_chatsys_basic_sys</module>
         <module>hue_06_json_jdbc_product</module>
+        <module>a_62_args_env_conffile</module>
+        <module>a_55_strings_patterns</module>
     </modules>
 
     <dependencyManagement>
