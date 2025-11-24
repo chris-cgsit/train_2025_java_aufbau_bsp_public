@@ -34,13 +34,13 @@ for (int i = 0; i < personen.size(); i++) {
 
 **Vorteile**
 
-* ✅ Entfernen während Iteration möglich
-* ✅ Zugriff über Index
+* Entfernen während Iteration möglich
+* Zugriff über Index
 
 **Nachteile**
 
-* ⚠️ Weniger elegant
-* ⚠️ Manuelle Indexverwaltung nötig
+* Weniger elegant
+* Manuelle Indexverwaltung nötig
 
 ---
 
@@ -56,12 +56,12 @@ for (Person p : personen) {
 
 **Vorteile**
 
-* ✅ Sehr lesbar
-* ✅ Kurz und prägnant
+* Sehr lesbar
+* Kurz und prägnant
 
 **Nachteile**
 
-* ❌ Kein Entfernen oder Hinzufügen möglich (`ConcurrentModificationException`)
+* Kein Entfernen oder Hinzufügen möglich (`ConcurrentModificationException`)
 
 ### Erklärung zum Iterator in der Enhanced for Loop:
 
@@ -100,12 +100,12 @@ while (it.hasNext()) {
 
 **Vorteile**
 
-* ✅ Sicheres Entfernen während Iteration
-* ✅ Einfacher als manuelles Indexmanagement
+* Sicheres Entfernen während Iteration
+* Einfacher als manuelles Indexmanagement
 
 **Nachteile**
 
-* ⚠️ Etwas mehr Schreibaufwand
+* Etwas mehr Schreibaufwand
 
 ---
 

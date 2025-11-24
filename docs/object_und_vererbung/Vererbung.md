@@ -1,4 +1,4 @@
-# 🧩 Java – Vererbung
+# Java – Vererbung
 *CGS IT Trainingsfolien (aktualisiert für Java 25 LTS)*
 
 ---
@@ -9,8 +9,8 @@
 - Vererbung = Spezialisierung einer Klasse durch eine andere.
 - Subklasse („abgeleitete Klasse“) erbt Attribute und Methoden der Superklasse.
 - Ziel: Code-Wiederverwendung, Erweiterbarkeit, Polymorphismus.
-
-💡 Begriffspaare:
+ 
+### Begriffspaare:
 
 | Deutsch | Englisch |
 |----------|-----------|
@@ -41,8 +41,8 @@ Dackel waldi = new Dackel();
 waldi.bellen();   // geerbte Methode
 waldi.buddeln();  // eigene Methode
 ```
-➡️ `Dackel` erbt automatisch alle `public` und `protected` Methoden der Klasse `Hund`.  
-➡️ `private` Elemente werden nicht vererbt.
+-- `Dackel` erbt automatisch alle `public` und `protected` Methoden der Klasse `Hund`.  
+-- `private` Elemente werden nicht vererbt.
 
 ⚠️ **Einfachvererbung:**  
 Java erlaubt nur **eine** Superklasse.
@@ -69,13 +69,13 @@ public class Dackel extends Hund {
 
 new Dackel();
 ```
-🧩 Ausgabe:
+Ausgabe:
 ```
 Hund-Konstruktor
 Dackel-Konstruktor
 ```
-➡️ Beim Erzeugen eines Subobjekts wird **zuerst der Konstruktor der Superklasse** ausgeführt.  
-➡️ `super()` wird implizit eingefügt, wenn kein expliziter Aufruf vorhanden ist.
+--️ Beim Erzeugen eines Subobjekts wird **zuerst der Konstruktor der Superklasse** ausgeführt.  
+-- `super()` wird implizit eingefügt, wenn kein expliziter Aufruf vorhanden ist.
 
 **Notizen (Trainer):**
 - Frage: „Warum startet immer die Superklasse zuerst?“
@@ -106,7 +106,7 @@ public class Dackel extends Hund {
 
 new Dackel(14);
 ```
-🧩 Ausgabe:
+Ausgabe:
 ```
 Hund mit Gewicht 14 kg
 Dackel-Konstruktor abgeschlossen
@@ -136,13 +136,13 @@ public class Dackel extends Hund {
 
 new Dackel().bellen();
 ```
-🧩 Ausgabe:
+Ausgabe:
 ```
 Wuff!
 Wuff-wuff, ich bin ein Dackel!
 ```
-💡 `this()` ruft anderen Konstruktor **derselben Klasse** auf.  
-💡 `super()` ruft Konstruktor **der Superklasse** auf.
+`this()` ruft anderen Konstruktor **derselben Klasse** auf.  
+`super()` ruft Konstruktor **der Superklasse** auf.
 
 **Notizen (Trainer):**
 - Beispiel live zeigen und nach `super.bellen()` entfernen → Unterschied sichtbar.
@@ -167,12 +167,12 @@ public class Dackel extends Hund {
 Hund h = new Dackel(); // erlaubt
 h.bellen();
 ```
-🧩 Ausgabe:
+Ausgabe:
 ```
 Wuff-wuff, kleiner Dackel!
 ```
-➡️ Obwohl `h` vom Typ `Hund` ist, wird **die Dackel-Methode** ausgeführt.  
-➡️ Das Verhalten richtet sich nach dem **Laufzeittyp** → Polymorphismus.
+ Obwohl `h` vom Typ `Hund` ist, wird **die Dackel-Methode** ausgeführt.  
+ Das Verhalten richtet sich nach dem **Laufzeittyp** → Polymorphismus.
 
 **Notizen (Trainer):**
 - Wichtig: Laufzeittyp ≠ Deklarationstyp!
@@ -196,8 +196,8 @@ public class Dackel extends Hund {
     }
 }
 ```
-➡️ Methode der Subklasse ersetzt jene der Superklasse.  
-➡️ Entscheidung erfolgt **zur Laufzeit** (dynamische Bindung).
+ Methode der Subklasse ersetzt jene der Superklasse.  
+ Entscheidung erfolgt **zur Laufzeit** (dynamische Bindung).
 
 **Notizen (Trainer):**
 - Live: entferne `@Override` → kein Fehler, aber Verhalten anders bei Tippfehlern.
@@ -238,9 +238,9 @@ if (obj instanceof Dackel d) {
     d.bellen();
 }
 ```
-➡️ `sealed` = kontrollierte Vererbung  
-➡️ `record` = immutable, nicht vererbbar  
-➡️ Pattern Matching = modernes Downcasting
+ `sealed` = kontrollierte Vererbung  
+ `record` = immutable, nicht vererbbar  
+ Pattern Matching = modernes Downcasting
 
 **Notizen (Trainer):**
 - Zeige, dass `sealed` nützlich ist bei stabilen APIs.
@@ -252,14 +252,14 @@ if (obj instanceof Dackel d) {
 ## Folie: Tipps und Pitfalls
 
 **Inhalt:**  
-💡 **Best Practices**
+**Best Practices**
 - Immer `@Override` verwenden.
 - Komposition > tiefe Vererbung.
 - Konstruktoren kurz halten.
 - Abstrakte Basisklassen sparsam einsetzen.
 - Beziehungen klar dokumentieren (`is-a` vs. `has-a`).
 
-⚠️ **Häufige Fehler**
+ **Häufige Fehler**
 - Fehlender `super(...)` bei nicht-parameterlosem Basiskonstruktor.
 - Zugriff auf `private` Felder der Superklasse.
 - Gleichnamige Felder (Shadowing).

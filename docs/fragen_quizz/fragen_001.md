@@ -244,7 +244,7 @@ class Hund extends Tier {
 
 ---
 
-## Gesamtauswertung
+## Gesamtauswertung Beispiel
 > Gesamtpunkte: 20  
 > Bestehensgrenze: 12 Punkte (60%)  
 > Kategorie: OOP Grundlagen, Vererbung, Interfaces, Polymorphismus
